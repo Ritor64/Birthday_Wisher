@@ -2,7 +2,8 @@ import smtplib
 import datetime as dt
 import random
 import csv
-from Birthday_Wisher.config.definitions import *
+from Birthday_Wisher.definitions import *
+import pandas as pd
 
 '''Function to send email'''
 def send_me_mail(to_addr, from_addr, password, smtp_server, message):
@@ -45,16 +46,17 @@ def letter_details(letter_filepath):
 # Reading csv file
 with open('birthdays.csv') as birth_file:
     birth_data = csv.reader(birth_file, delimiter=',')
+    test_data = pd.read_csv('birthdays.csv')
+    print(test_data)
+
 
 # Extracting field names and data
-    fields = next(birth_data)
     for row in birth_data:
         rows.append(row)
     birth_name = row[0]
     recipient = row[1]
-    b_year = int(row[2])
     b_month = int(row[3])
     b_day = int(row[4])
 # Sending letter to recipient
-    if year == b_year and month == b_month and day == b_day:
-        send_me_mail(recipient, from_addr, password, smtp_server, letter_details(letter_filepath))
+#     if month == b_month and day == b_day:
+#         send_me_mail(recipient, from_addr, password, smtp_server, letter_details(letter_filepath))
